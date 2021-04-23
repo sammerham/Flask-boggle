@@ -27,7 +27,8 @@ class BoggleAppTestCase(TestCase):
 
             self.assertEqual(response.status_code, 200)
             self.assertIn('<table class="board">', html)
-
+            self.assertIn('<table', html)
+            self.assertIn('boggle homepage. used in testing', html)
 
     def test_api_new_game(self):
         """Test starting a new game."""

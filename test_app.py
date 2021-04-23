@@ -34,5 +34,15 @@ class BoggleAppTestCase(TestCase):
         """Test starting a new game."""
 
         with self.client as client:
-            ...
-            # write a test for this route
+            response = client.get('/api/new-game')
+            data = response.get_json()
+            game_id = data['game_id']
+            board = data['board']
+
+            self.assertIsInstance(game_id, str)
+            self.assertIsInstance(board, list)
+
+
+
+
+

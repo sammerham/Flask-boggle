@@ -22,8 +22,9 @@ def new_game():
     """Start a new game and return JSON: {game_id, board}."""
 
     # get a unique id for the board we're creating
-    game_id = str(uuid4())
-    game = BoggleGame()
-    games[game_id] = game
+    game_id = str(uuid4())  
+    game = BoggleGame()   
+    games[game_id] = game   
+    return jsonify(game_id=game_id, board=game.board)
 
-    return {"gameId": "need-real-id", "board": "need-real-board"}
+     #assertIsInstance(a, b)

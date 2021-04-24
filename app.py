@@ -7,6 +7,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "this-is-secret"
 
 # The boggle games created, keyed by game id
+
 games = {}
 
 
@@ -25,7 +26,11 @@ def new_game():
     game_id = str(uuid4())  
     game = BoggleGame()   
     games[game_id] = game   
+
+    print("making new game", games)
+
     return jsonify(game_id=game_id, board=game.board)
+
 
 
  
@@ -48,12 +53,15 @@ def score_word():
     user_word = data['word'].upper()
     game_id = data['game_id']
     current_game = games[game_id]
+
+    print("checking word", games)
     
-    if not current_game.is_word_in_word_list(user_word):  # ture/false
-        result: "not-word"
+    if not current_game.is_word_in_word_list(user_word):  # true/false
+        result = "not-word"
     elif not current_game.check_word_on_board(user_word):  # true/false
-        result: "not-on-board"
+        result = "not-on-board"
     else:
-        result: "ok"
+        result = "ok"
+    
 
     return jsonify(result=result)

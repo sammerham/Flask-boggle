@@ -27,4 +27,33 @@ def new_game():
     games[game_id] = game   
     return jsonify(game_id=game_id, board=game.board)
 
-     #assertIsInstance(a, b)
+
+ 
+
+
+# games dict holds the game instance we want to check
+    # current_game = games[id] to find right instance
+    #is_word_in_word_list(self, word) checks if word is in dictionary (wordlist)
+        # current_game.word_list.check_word(user_word) ==
+        #   true means its in list!
+        #   false means its not in word list
+    # check_word_on_board(self, word)
+        #Can word be found in board? Returns True/False.
+
+
+@app.route('/api/score-word', methods=['POST'])
+def score_word():
+    """check if word is legal and calculate score"""
+    data = request.json
+    user_word = data['word'].upper()
+    game_id = data['game_id']
+    current_game = games[game_id]
+    
+    if not current_game.is_word_in_word_list(user_word):  # ture/false
+        result: "not-word"
+    elif not current_game.check_word_on_board(user_word):  # true/false
+        result: "not-on-board"
+    else:
+        result: "ok"
+
+    return jsonify(result=result)
